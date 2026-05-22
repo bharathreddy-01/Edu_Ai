@@ -1,5 +1,3 @@
-import { Menu } from "lucide-react";
-
 import {
   AiRecommendationsCard,
   CoachSummaryHero,
@@ -9,6 +7,7 @@ import {
   WeakTopicsCard,
 } from "@/components/dashboard/dashboard-widgets";
 import { AppSidebar } from "@/components/layout/app-sidebar";
+import { MobileSidebar } from "@/components/layout/mobile-sidebar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -75,14 +74,7 @@ export default async function StudentDashboardPage() {
           <header className="bg-background/78 sticky top-0 z-20 border-b backdrop-blur-xl">
             <div className="flex h-16 items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
               <div className="flex min-w-0 items-center gap-3">
-                <Button
-                  className="lg:hidden"
-                  size="icon"
-                  variant="ghost"
-                  aria-label="Open navigation"
-                >
-                  <Menu className="size-5" aria-hidden="true" />
-                </Button>
+                <MobileSidebar />
                 <div className="min-w-0">
                   <p className="text-muted-foreground text-xs font-medium tracking-[0.16em] uppercase">
                     Student dashboard
