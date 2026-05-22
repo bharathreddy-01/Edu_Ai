@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import {
@@ -16,7 +16,6 @@ import {
   Target,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
@@ -35,6 +34,18 @@ export function MobileSidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
+  // Disable body scroll when sidebar is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
   const handleClose = () => setIsOpen(false);
   const handleOpen = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -48,11 +59,16 @@ export function MobileSidebar() {
     setIsOpen(false);
   };
 
+  // Close sidebar on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
   return (
     <>
       <button
         onClick={handleOpen}
-        className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent hover:bg-accent text-foreground"
+        className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent hover:bg-accent text-foreground transition-colors"
         aria-label="Open navigation"
         type="button"
       >
@@ -63,39 +79,34 @@ export function MobileSidebar() {
         <>
           {/* Overlay backdrop */}
           <div
-            className="fixed inset-0 z-40 bg-black/40"
+            className="fixed inset-0 z-40 bg-black/40 animate-in fade-in duration-200"
             onClick={handleBackdropClick}
             aria-hidden="true"
-            style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0 }}
           />
 
           {/* Mobile sidebar */}
           <div 
-            className="fixed inset-y-0 left-0 z-50 w-72 overflow-y-auto"
+            className="fixed inset-y-0 left-0 z-50 w-full sm:w-72 overflow-y-auto animate-in slide-in-from-left duration-300"
             style={{ 
               backgroundColor: "var(--color-background, white)",
               borderRight: "1px solid var(--color-border, #e5e7eb)",
-              position: "fixed",
-              top: 0,
-              left: 0,
-              bottom: 0,
-              width: "18rem"
+              maxWidth: "min(100vw - 2rem, 18rem)",
             }}
           >
             <div className="flex items-center justify-between border-b px-4 py-4">
-              <div className="flex items-center gap-3">
-                <div className="bg-primary text-primary-foreground flex size-10 items-center justify-center rounded-lg shadow-sm">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="bg-primary text-primary-foreground flex size-10 items-center justify-center rounded-lg shadow-sm flex-shrink-0">
                   <GraduationCap className="size-5" aria-hidden="true" />
                 </div>
-                <div>
-                  <p className="text-sm font-semibold">AI Learning Coach</p>
-                  <p className="text-muted-foreground text-xs">JEE/NEET workspace</p>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold truncate">AI Learning Coach</p>
+                  <p className="text-muted-foreground text-xs truncate">JEE/NEET workspace</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={handleClose}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent hover:bg-accent"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent hover:bg-accent flex-shrink-0 transition-colors"
                 aria-label="Close navigation"
               >
                 <X className="size-5" aria-hidden="true" />
@@ -123,19 +134,19 @@ export function MobileSidebar() {
                     )}
                     aria-current={isActive ? "page" : undefined}
                   >
-                    <Icon className="size-4" aria-hidden="true" />
-                    {item.label}
+                    <Icon className="size-4 flex-shrink-0" aria-hidden="true" />
+                    <span className="truncate">{item.label}</span>
                   </a>
                 );
               })}
             </nav>
 
             <div className="bg-card m-4 rounded-lg border p-4">
-              <div className="flex items-center gap-2">
-                <Brain className="text-primary size-4" aria-hidden="true" />
-                <p className="text-sm font-semibold">Coach insight</p>
+              <div className="flex items-center gap-2 min-w-0">
+                <Brain className="text-primary size-4 flex-shrink-0" aria-hidden="true" />
+                <p className="text-sm font-semibold truncate">Coach insight</p>
               </div>
-              <p className="text-muted-foreground mt-3 text-sm leading-6">
+              <p className="text-muted-foreground mt-3 text-xs sm:text-sm leading-6">
                 Your Physics accuracy rises after 25-minute focused sprints. Keep the
                 next session short and equation-heavy.
               </p>
@@ -149,3 +160,4 @@ export function MobileSidebar() {
     </>
   );
 }
+
