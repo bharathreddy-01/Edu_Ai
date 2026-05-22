@@ -35,29 +35,53 @@ export function MobileSidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
+  const handleClose = () => setIsOpen(false);
+  const handleOpen = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsOpen(true);
+  };
+
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsOpen(false);
+  };
+
   return (
     <>
-      <Button
-        className="lg:hidden"
-        size="icon"
-        variant="ghost"
+      <button
+        onClick={handleOpen}
+        className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent hover:bg-accent text-foreground"
         aria-label="Open navigation"
-        onClick={() => setIsOpen(true)}
+        type="button"
       >
         <Menu className="size-5" aria-hidden="true" />
-      </Button>
+      </button>
 
       {isOpen && (
         <>
           {/* Overlay backdrop */}
           <div
-            className="fixed inset-0 z-40 bg-black/50"
-            onClick={() => setIsOpen(false)}
+            className="fixed inset-0 z-40 bg-black/40"
+            onClick={handleBackdropClick}
             aria-hidden="true"
+            style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0 }}
           />
 
           {/* Mobile sidebar */}
-          <div className="fixed inset-y-0 left-0 z-50 w-72 overflow-y-auto bg-white dark:bg-slate-950 border-r">
+          <div 
+            className="fixed inset-y-0 left-0 z-50 w-72 overflow-y-auto"
+            style={{ 
+              backgroundColor: "var(--color-background, white)",
+              borderRight: "1px solid var(--color-border, #e5e7eb)",
+              position: "fixed",
+              top: 0,
+              left: 0,
+              bottom: 0,
+              width: "18rem"
+            }}
+          >
             <div className="flex items-center justify-between border-b px-4 py-4">
               <div className="flex items-center gap-3">
                 <div className="bg-primary text-primary-foreground flex size-10 items-center justify-center rounded-lg shadow-sm">
@@ -68,14 +92,14 @@ export function MobileSidebar() {
                   <p className="text-muted-foreground text-xs">JEE/NEET workspace</p>
                 </div>
               </div>
-              <Button
-                size="icon"
-                variant="ghost"
-                onClick={() => setIsOpen(false)}
+              <button
+                type="button"
+                onClick={handleClose}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-transparent hover:bg-accent"
                 aria-label="Close navigation"
               >
                 <X className="size-5" aria-hidden="true" />
-              </Button>
+              </button>
             </div>
 
             <nav className="mt-4 grid gap-1 px-4 py-2" aria-label="Mobile navigation">
@@ -91,9 +115,9 @@ export function MobileSidebar() {
                   <a
                     key={item.label}
                     href={item.href}
-                    onClick={() => setIsOpen(false)}
+                    onClick={handleClose}
                     className={cn(
-                      "focus-ring text-muted-foreground hover:bg-secondary hover:text-foreground flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
+                      "text-muted-foreground hover:bg-secondary hover:text-foreground flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
                       isActive &&
                         "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground shadow-sm",
                     )}
