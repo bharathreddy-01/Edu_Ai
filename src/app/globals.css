@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(0.985 0.006 250);
+  --foreground: oklch(0.19 0.036 258);
+  --card: oklch(1 0 0 / 0.86);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.55 0.176 254);
+  --primary-foreground: oklch(0.99 0.004 250);
+  --secondary: oklch(0.94 0.026 232);
+  --secondary-foreground: oklch(0.24 0.046 258);
+  --muted: oklch(0.95 0.014 245);
+  --muted-foreground: oklch(0.48 0.033 256);
+  --accent: oklch(0.79 0.142 158);
+  --accent-foreground: oklch(0.17 0.042 160);
+  --warning: oklch(0.79 0.144 82);
+  --warning-foreground: oklch(0.22 0.049 72);
+  --success: oklch(0.71 0.151 155);
+  --success-foreground: oklch(0.14 0.032 155);
+  --info: oklch(0.72 0.137 235);
+  --info-foreground: oklch(0.16 0.039 236);
+  --destructive: oklch(0.58 0.206 27);
+  --destructive-foreground: oklch(0.99 0.004 250);
+  --border: oklch(0.88 0.018 247 / 0.86);
+  --input: var(--border);
+  --ring: oklch(0.62 0.159 254);
+  --radius: 0.5rem;
+  --surface-glass: oklch(1 0 0 / 0.68);
+  --surface-elevated: oklch(0.985 0.006 250 / 0.9);
+  --chart-physics: oklch(0.56 0.18 254);
+  --chart-chemistry: oklch(0.72 0.145 155);
+  --chart-math: oklch(0.72 0.15 78);
+  --chart-biology: oklch(0.66 0.16 332);
+}
+
+.dark {
+  --background: oklch(0.145 0.026 260);
+  --foreground: oklch(0.96 0.008 248);
+  --card: oklch(0.205 0.032 263 / 0.78);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.73 0.14 248);
+  --primary-foreground: oklch(0.15 0.026 260);
+  --secondary: oklch(0.265 0.036 258);
+  --secondary-foreground: oklch(0.93 0.012 252);
+  --muted: oklch(0.245 0.029 264);
+  --muted-foreground: oklch(0.71 0.026 257);
+  --accent: oklch(0.77 0.136 156);
+  --accent-foreground: oklch(0.15 0.026 158);
+  --warning: oklch(0.81 0.13 82);
+  --warning-foreground: oklch(0.17 0.039 72);
+  --success: oklch(0.74 0.135 155);
+  --success-foreground: oklch(0.14 0.032 155);
+  --info: oklch(0.77 0.116 235);
+  --info-foreground: oklch(0.13 0.034 236);
+  --destructive: oklch(0.64 0.208 25);
+  --destructive-foreground: oklch(0.99 0.004 250);
+  --border: oklch(0.32 0.035 262 / 0.82);
+  --input: var(--border);
+  --ring: oklch(0.72 0.142 248);
+  --surface-glass: oklch(0.225 0.033 263 / 0.62);
+  --surface-elevated: oklch(0.205 0.032 263 / 0.9);
+  --chart-physics: oklch(0.74 0.14 248);
+  --chart-chemistry: oklch(0.77 0.136 156);
+  --chart-math: oklch(0.82 0.13 82);
+  --chart-biology: oklch(0.75 0.145 332);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface-glass: var(--surface-glass);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-chart-physics: var(--chart-physics);
+  --color-chart-chemistry: var(--chart-chemistry);
+  --color-chart-math: var(--chart-math);
+  --color-chart-biology: var(--chart-biology);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at top left,
+      color-mix(in oklch, var(--primary) 16%, transparent),
+      transparent 34rem
+    ),
+    radial-gradient(
+      circle at bottom right,
+      color-mix(in oklch, var(--accent) 18%, transparent),
+      transparent 30rem
+    ),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in oklch, var(--primary) 22%, transparent);
+}
+
+.glass-panel {
+  border: 1px solid var(--border);
+  background: var(--surface-glass);
+  box-shadow: 0 18px 60px color-mix(in oklch, var(--foreground) 8%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus-ring:focus-visible {
+  outline-color: var(--ring);
+}
