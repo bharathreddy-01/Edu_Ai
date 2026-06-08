@@ -1,9 +1,5 @@
 # AI Personalized Learning Coach
 
-Production-grade Next.js 15 frontend foundation using App Router, TypeScript,
-Tailwind CSS v4, shadcn-style components, dark/light mode, ESLint, Prettier,
-loading states, and error boundaries.
-
 ## Installation Commands
 
 ```bash
@@ -22,101 +18,11 @@ npm run dev
 
 Open http://localhost:3000.
 
-## Folder Structure
-
-```text
-src/
-  app/
-    error.tsx
-    global-error.tsx
-    globals.css
-    layout.tsx
-    loading.tsx
-    not-found.tsx
-    page.tsx
-  components/
-    providers/
-      theme-provider.tsx
-    ui/
-      button.tsx
-    theme-toggle.tsx
-  lib/
-    env.ts
-    utils.ts
-  types/
-    index.ts
-```
-
-## Recommended Dependencies
-
-- `next-themes` for dark/light/system theme handling.
-- `class-variance-authority`, `clsx`, and `tailwind-merge` for reusable
-  component variants.
-- `lucide-react` for consistent icons.
-- `zod` for typed environment validation.
-- `prettier`, `prettier-plugin-tailwindcss`, and `eslint-config-prettier` for
-  clean code standards.
-
 ## UI Design System
 
-### Typography
 
-- Font: Geist Sans for product UI, Geist Mono for technical values.
-- UI text: `text-xs`, `text-sm`, and `text-base` for dense dashboard surfaces.
-- Headings: `text-lg` for page chrome, `text-2xl` for cards, `text-3xl` to
-  `text-4xl` for primary dashboard moments.
-- Letter spacing stays neutral for readability, with uppercase labels using
-  `tracking-[0.16em]`.
 
-### Color Palette
 
-- Core tokens: `background`, `foreground`, `card`, `primary`, `secondary`,
-  `muted`, `accent`, `border`, and `ring`.
-- Feedback tokens: `success`, `warning`, `info`, and `destructive`.
-- Subject tokens: `chart-physics`, `chart-chemistry`, `chart-math`, and
-  `chart-biology`.
-- Both light and dark themes are defined in `src/app/globals.css`.
-
-### Spacing
-
-- Base rhythm follows Tailwind's 4px scale.
-- Compact UI uses `gap-2`, `gap-3`, `p-3`, and `p-4`.
-- Dashboard sections use `gap-6`, `px-4`, `sm:px-6`, and `lg:px-8`.
-- Major panels use `rounded-lg`, restrained borders, and consistent card
-  padding.
-
-### Button Styles
-
-Reusable button variants live in `src/components/ui/button.tsx`:
-
-- `default`
-- `secondary`
-- `outline`
-- `ghost`
-- `destructive`
-- `link`
-
-Sizes include `sm`, `default`, `lg`, and `icon`.
-
-### Card Components
-
-Reusable card primitives live in `src/components/ui/card.tsx`:
-
-- `Card`
-- `CardHeader`
-- `CardTitle`
-- `CardDescription`
-- `CardContent`
-
-Specialized dashboard cards live in `src/components/ui/stat-card.tsx`.
-
-### Sidebar Design
-
-The reusable SaaS sidebar lives in `src/components/layout/app-sidebar.tsx`.
-It includes primary navigation, active route styling, AI coach insight, and a
-JEE/NEET-focused brand block.
-
-### Dashboard Layouts
 
 The homepage demonstrates:
 
